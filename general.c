@@ -1,10 +1,5 @@
 int* readIntArr(int len)
 {
-    /*
-    printf("Please enter array length..\n");
-    int len;
-    scanf("%d\n",len);
-    */
     int* arr = malloc(sizeof(int)* len);
     int i;
     for(i = 0; i < len; i++)
@@ -16,7 +11,7 @@ int* readIntArr(int len)
 
 void printIntArr(int* arr,int len)
 {
-    if (!arr || len ==0)
+    if (!arr || len == 0)
         return;
 
     int i;

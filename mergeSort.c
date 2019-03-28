@@ -1,6 +1,6 @@
 #include "mergeSort.h"
 
-int* merge(int* arr1,int len1,int* arr2,int len2)
+int* merge(int* arr1,int len1,int* arr2,int len2,int* invCount)
 {
     int* finalArr = (int*) malloc(sizeof(int) *(len1+len2));
 
@@ -20,6 +20,7 @@ int* merge(int* arr1,int len1,int* arr2,int len2)
             finalArr[i]= arr2[k];
             i++;
             k++;
+            *invCount += len1 -j; //the trick of counting inversions
         }
     }
     while (i < len1 + len2 && j >= len1 && k <len2)
@@ -36,7 +37,7 @@ int* merge(int* arr1,int len1,int* arr2,int len2)
     }
     return finalArr;
 }
-int* mergeSort(int* arr,int length)
+int* mergeSort(int* arr,int length,int *invCount)
 {
     if (length ==1)
         return arr;
@@ -57,9 +58,9 @@ int* mergeSort(int* arr,int length)
         i++;
     }
 
-    arr1= mergeSort(&arr1[0],(length /2));
-    arr2= mergeSort(&arr2[0],length -(length /2));
+    arr1= mergeSort(arr1,(length /2),invCount);
+    arr2= mergeSort(arr2,length -(length /2),invCount);
 
-    int* sorted=(int*) merge(arr1,length /2,arr2,length -(length /2)) ;
+    int* sorted=(int*) merge(arr1,length /2,arr2,length -(length /2),invCount) ;
     return sorted;
 }
